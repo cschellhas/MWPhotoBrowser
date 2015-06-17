@@ -52,6 +52,8 @@
 		25D492651B3176AA006AFC36 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D492441B3176AA006AFC36 /* UIImageView+WebCache.m */; };
 		25D492661B3176AA006AFC36 /* UIView+WebCacheOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 25D492451B3176AA006AFC36 /* UIView+WebCacheOperation.h */; };
 		25D492671B3176AA006AFC36 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D492461B3176AA006AFC36 /* UIView+WebCacheOperation.m */; };
+		25D4926A1B31782B006AFC36 /* MBProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 25D492681B31782B006AFC36 /* MBProgressHUD.h */; };
+		25D4926B1B31782B006AFC36 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D492691B31782B006AFC36 /* MBProgressHUD.m */; };
 		4C6F96C814AF704100F8389A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C6F96C714AF704100F8389A /* Foundation.framework */; };
 		4C6F96E214AF70BD00F8389A /* MWCaptionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F96D614AF70BD00F8389A /* MWCaptionView.h */; };
 		4C6F96E314AF70BD00F8389A /* MWCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F96D714AF70BD00F8389A /* MWCaptionView.m */; };
@@ -65,8 +67,6 @@
 		4C6F96EB14AF70BD00F8389A /* MWTapDetectingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F96DF14AF70BD00F8389A /* MWTapDetectingView.m */; };
 		4C6F96EC14AF70BD00F8389A /* MWZoomingScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F96E014AF70BD00F8389A /* MWZoomingScrollView.h */; };
 		4C6F96ED14AF70BD00F8389A /* MWZoomingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F96E114AF70BD00F8389A /* MWZoomingScrollView.m */; };
-		4C6F96F614AF710800F8389A /* MBProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F96F414AF710800F8389A /* MBProgressHUD.h */; };
-		4C6F96F714AF710800F8389A /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F96F514AF710800F8389A /* MBProgressHUD.m */; };
 		4C6F97C714AF74E200F8389A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C6F97C614AF74E200F8389A /* MessageUI.framework */; };
 		4CB08BA314B1F38700730E9F /* MWPhotoProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB08BA214B1F38700730E9F /* MWPhotoProtocol.h */; };
 /* End PBXBuildFile section */
@@ -117,6 +117,8 @@
 		25D492441B3176AA006AFC36 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = SOURCE_ROOT; };
 		25D492451B3176AA006AFC36 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = SOURCE_ROOT; };
 		25D492461B3176AA006AFC36 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = SOURCE_ROOT; };
+		25D492681B31782B006AFC36 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = SOURCE_ROOT; };
+		25D492691B31782B006AFC36 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = SOURCE_ROOT; };
 		4C6F96C414AF704100F8389A /* libMWPhotoBrowser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMWPhotoBrowser.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C6F96C714AF704100F8389A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4C6F96CB14AF704100F8389A /* MWPhotoBrowser-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MWPhotoBrowser-Prefix.pch"; sourceTree = SOURCE_ROOT; };
@@ -133,8 +135,6 @@
 		4C6F96E014AF70BD00F8389A /* MWZoomingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWZoomingScrollView.h; path = Classes/MWZoomingScrollView.h; sourceTree = SOURCE_ROOT; };
 		4C6F96E114AF70BD00F8389A /* MWZoomingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MWZoomingScrollView.m; path = Classes/MWZoomingScrollView.m; sourceTree = SOURCE_ROOT; };
 		4C6F96EF14AF70DC00F8389A /* MWPhotoBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MWPhotoBrowser.bundle; sourceTree = SOURCE_ROOT; };
-		4C6F96F414AF710800F8389A /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = Libraries/MBProgressHUD/MBProgressHUD.h; sourceTree = SOURCE_ROOT; };
-		4C6F96F514AF710800F8389A /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = Libraries/MBProgressHUD/MBProgressHUD.m; sourceTree = SOURCE_ROOT; };
 		4C6F97C614AF74E200F8389A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4CB08BA214B1F38700730E9F /* MWPhotoProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWPhotoProtocol.h; path = Classes/MWPhotoProtocol.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -237,7 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				0E8515BE17FC77D200FE1EF3 /* DACircularProgress (675f395) */,
-				4C6F96F214AF70FA00F8389A /* MBProgressHUD (0.8) */,
+				4C6F96F214AF70FA00F8389A /* MBProgressHUD (0.9) */,
 				4C6F96F114AF70F500F8389A /* SDWebImage (3.7.2) */,
 			);
 			name = Libraries;
@@ -283,13 +283,13 @@
 			name = "SDWebImage (3.7.2)";
 			sourceTree = "<group>";
 		};
-		4C6F96F214AF70FA00F8389A /* MBProgressHUD (0.8) */ = {
+		4C6F96F214AF70FA00F8389A /* MBProgressHUD (0.9) */ = {
 			isa = PBXGroup;
 			children = (
-				4C6F96F414AF710800F8389A /* MBProgressHUD.h */,
-				4C6F96F514AF710800F8389A /* MBProgressHUD.m */,
+				25D492681B31782B006AFC36 /* MBProgressHUD.h */,
+				25D492691B31782B006AFC36 /* MBProgressHUD.m */,
 			);
-			name = "MBProgressHUD (0.8)";
+			name = "MBProgressHUD (0.9)";
 			sourceTree = "<group>";
 		};
 		4C6F97E114AF7CCE00F8389A /* Supporting Files */ = {
@@ -330,8 +330,8 @@
 				25D492471B3176AA006AFC36 /* MKAnnotationView+WebCache.h in Headers */,
 				0E3D58D618047B600000E3A0 /* MWGridCell.h in Headers */,
 				25D492491B3176AA006AFC36 /* NSData+ImageContentType.h in Headers */,
+				25D4926A1B31782B006AFC36 /* MBProgressHUD.h in Headers */,
 				25D492601B3176AA006AFC36 /* UIImage+WebP.h in Headers */,
-				4C6F96F614AF710800F8389A /* MBProgressHUD.h in Headers */,
 				4CB08BA314B1F38700730E9F /* MWPhotoProtocol.h in Headers */,
 				25D492641B3176AA006AFC36 /* UIImageView+WebCache.h in Headers */,
 				0EFEA24D17FB08B400E451B6 /* MWCommon.h in Headers */,
@@ -400,6 +400,7 @@
 				4C6F96E714AF70BD00F8389A /* MWPhotoBrowser.m in Sources */,
 				25D492651B3176AA006AFC36 /* UIImageView+WebCache.m in Sources */,
 				25D4924E1B3176AA006AFC36 /* SDWebImageCompat.m in Sources */,
+				25D4926B1B31782B006AFC36 /* MBProgressHUD.m in Sources */,
 				0E3D58D718047B600000E3A0 /* MWGridCell.m in Sources */,
 				25D492501B3176AA006AFC36 /* SDWebImageDecoder.m in Sources */,
 				25D4925F1B3176AA006AFC36 /* UIImage+MultiFormat.m in Sources */,
@@ -412,7 +413,6 @@
 				4C6F96EB14AF70BD00F8389A /* MWTapDetectingView.m in Sources */,
 				4C6F96ED14AF70BD00F8389A /* MWZoomingScrollView.m in Sources */,
 				25D492631B3176AA006AFC36 /* UIImageView+HighlightedWebCache.m in Sources */,
-				4C6F96F714AF710800F8389A /* MBProgressHUD.m in Sources */,
 				25D4924C1B3176AA006AFC36 /* SDImageCache.m in Sources */,
 				25D4925B1B3176AA006AFC36 /* UIButton+WebCache.m in Sources */,
 				25D4924A1B3176AA006AFC36 /* NSData+ImageContentType.m in Sources */,
