@@ -21,7 +21,7 @@
 
 @property (strong, nonatomic, readwrite) SDImageCache *imageCache;
 @property (strong, nonatomic, readwrite) SDWebImageDownloader *imageDownloader;
-@property (strong, nonatomic) NSMutableArray *failedURLs;
+@property (strong, nonatomic) NSMutableSet *failedURLs;
 @property (strong, nonatomic) NSMutableArray *runningOperations;
 
 @end
@@ -41,7 +41,7 @@
     if ((self = [super init])) {
         _imageCache = [self createCache];
         _imageDownloader = [SDWebImageDownloader sharedDownloader];
-        _failedURLs = [NSMutableArray new];
+        _failedURLs = [NSMutableSet new];
         _runningOperations = [NSMutableArray new];
     }
     return self;
@@ -112,7 +112,7 @@
                                         progress:(SDWebImageDownloaderProgressBlock)progressBlock
                                        completed:(SDWebImageCompletionWithFinishedBlock)completedBlock {
     // Invoking this method without a completedBlock is pointless
-    NSParameterAssert(completedBlock);
+    NSAssert(completedBlock != nil, @"If you mean to prefetch the image, use -[SDWebImagePrefetcher prefetchURLs] instead");
 
     // Very common mistake is to send the URL using NSString object instead of NSURL. For some strange reason, XCode won't
     // throw any warning for this type mismatch. Here we failsafe this error by allowing URLs to be passed as NSString.
@@ -199,13 +199,18 @@
                     }
                 }
                 else {
+                    if ((options & SDWebImageRetryFailed)) {
+                        @synchronized (self.failedURLs) {
+                            [self.failedURLs removeObject:url];
+                        }
+                    }
+                    
                     BOOL cacheOnDisk = !(options & SDWebImageCacheMemoryOnly);
 
                     if (options & SDWebImageRefreshCached && image && !downloadedImage) {
                         // Image refresh hit the NSURLCache cache, do not call the completion block
                     }
-                            // NOTE: We don't call transformDownloadedImage delegate method on animated images as most transformation code would mangle it
-                    else if (downloadedImage && !downloadedImage.images && [self.delegate respondsToSelector:@selector(imageManager:transformDownloadedImage:withURL:)]) {
+                    else if (downloadedImage && (!downloadedImage.images || (options & SDWebImageTransformAnimatedImage)) && [self.delegate respondsToSelector:@selector(imageManager:transformDownloadedImage:withURL:)]) {
                         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                             UIImage *transformedImage = [self.delegate imageManager:self transformDownloadedImage:downloadedImage withURL:url];
 
@@ -283,8 +288,9 @@
 
 - (void)cancelAll {
     @synchronized (self.runningOperations) {
-        [self.runningOperations makeObjectsPerformSelector:@selector(cancel)];
-        [self.runningOperations removeAllObjects];
+        NSArray *copiedOperations = [self.runningOperations copy];
+        [copiedOperations makeObjectsPerformSelector:@selector(cancel)];
+        [self.runningOperations removeObjectsInArray:copiedOperations];
     }
 }
 
