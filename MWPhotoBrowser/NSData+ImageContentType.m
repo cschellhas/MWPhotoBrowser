@@ -26,12 +26,12 @@
             if ([data length] < 12) {
                 return nil;
             }
-
+            
             NSString *testString = [[NSString alloc] initWithData:[data subdataWithRange:NSMakeRange(0, 12)] encoding:NSASCIIStringEncoding];
             if ([testString hasPrefix:@"RIFF"] && [testString hasSuffix:@"WEBP"]) {
                 return @"image/webp";
             }
-
+            
             return nil;
     }
     return nil;

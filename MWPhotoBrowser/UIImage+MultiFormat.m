@@ -18,6 +18,10 @@
 @implementation UIImage (MultiFormat)
 
 + (UIImage *)sd_imageWithData:(NSData *)data {
+    if (!data) {
+        return nil;
+    }
+    
     UIImage *image;
     NSString *imageContentType = [NSData sd_contentTypeForImageData:data];
     if ([imageContentType isEqualToString:@"image/gif"]) {
@@ -38,8 +42,8 @@
                                   orientation:orientation];
         }
     }
-
-
+    
+    
     return image;
 }
 
@@ -75,31 +79,31 @@
         case 1:
             orientation = UIImageOrientationUp;
             break;
-
+            
         case 3:
             orientation = UIImageOrientationDown;
             break;
-
+            
         case 8:
             orientation = UIImageOrientationLeft;
             break;
-
+            
         case 6:
             orientation = UIImageOrientationRight;
             break;
-
+            
         case 2:
             orientation = UIImageOrientationUpMirrored;
             break;
-
+            
         case 4:
             orientation = UIImageOrientationDownMirrored;
             break;
-
+            
         case 5:
             orientation = UIImageOrientationLeftMirrored;
             break;
-
+            
         case 7:
             orientation = UIImageOrientationRightMirrored;
             break;

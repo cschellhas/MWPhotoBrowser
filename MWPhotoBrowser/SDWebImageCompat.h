@@ -13,7 +13,7 @@
 #error SDWebImage does not support Objective-C Garbage Collection
 #endif
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_5_0
+#if __IPHONE_OS_VERSION_MIN_REQUIRED != 20000 && __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_5_0
 #error SDWebImage doesn't support Deployement Target version < 5.0
 #endif
 
@@ -40,10 +40,10 @@
 #endif
 
 #if OS_OBJECT_USE_OBJC
-    #undef SDDispatchQueueRelease
-    #undef SDDispatchQueueSetterSementics
-    #define SDDispatchQueueRelease(q)
-    #define SDDispatchQueueSetterSementics strong
+#undef SDDispatchQueueRelease
+#undef SDDispatchQueueSetterSementics
+#define SDDispatchQueueRelease(q)
+#define SDDispatchQueueSetterSementics strong
 #else
 #undef SDDispatchQueueRelease
 #undef SDDispatchQueueSetterSementics
@@ -58,15 +58,15 @@ typedef void(^SDWebImageNoParamsBlock)();
 extern NSString *const SDWebImageErrorDomain;
 
 #define dispatch_main_sync_safe(block)\
-    if ([NSThread isMainThread]) {\
-        block();\
-    } else {\
-        dispatch_sync(dispatch_get_main_queue(), block);\
-    }
+if ([NSThread isMainThread]) {\
+block();\
+} else {\
+dispatch_sync(dispatch_get_main_queue(), block);\
+}
 
 #define dispatch_main_async_safe(block)\
-    if ([NSThread isMainThread]) {\
-        block();\
-    } else {\
-        dispatch_async(dispatch_get_main_queue(), block);\
-    }
+if ([NSThread isMainThread]) {\
+block();\
+} else {\
+dispatch_async(dispatch_get_main_queue(), block);\
+}

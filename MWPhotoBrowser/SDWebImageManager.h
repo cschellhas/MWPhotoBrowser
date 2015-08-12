@@ -17,24 +17,24 @@ typedef NS_OPTIONS(NSUInteger, SDWebImageOptions) {
      * This flag disable this blacklisting.
      */
     SDWebImageRetryFailed = 1 << 0,
-
+    
     /**
      * By default, image downloads are started during UI interactions, this flags disable this feature,
      * leading to delayed download on UIScrollView deceleration for instance.
      */
     SDWebImageLowPriority = 1 << 1,
-
+    
     /**
      * This flag disables on-disk caching
      */
     SDWebImageCacheMemoryOnly = 1 << 2,
-
+    
     /**
      * This flag enables progressive download, the image is displayed progressively during download as a browser would do.
      * By default, the image is only displayed once completely downloaded.
      */
     SDWebImageProgressiveDownload = 1 << 3,
-
+    
     /**
      * Even if the image is cached, respect the HTTP response cache control, and refresh the image from remote location if needed.
      * The disk caching will be handled by NSURLCache instead of SDWebImage leading to slight performance degradation.
@@ -44,28 +44,28 @@ typedef NS_OPTIONS(NSUInteger, SDWebImageOptions) {
      * Use this flag only if you can't make your URLs static with embeded cache busting parameter.
      */
     SDWebImageRefreshCached = 1 << 4,
-
+    
     /**
      * In iOS 4+, continue the download of the image if the app goes to background. This is achieved by asking the system for
      * extra time in background to let the request finish. If the background task expires the operation will be cancelled.
      */
     SDWebImageContinueInBackground = 1 << 5,
-
+    
     /**
      * Handles cookies stored in NSHTTPCookieStore by setting
      * NSMutableURLRequest.HTTPShouldHandleCookies = YES;
      */
     SDWebImageHandleCookies = 1 << 6,
-
+    
     /**
      * Enable to allow untrusted SSL ceriticates.
      * Useful for testing purposes. Use with caution in production.
      */
     SDWebImageAllowInvalidSSLCertificates = 1 << 7,
-
+    
     /**
      * By default, image are loaded in the order they were queued. This flag move them to
-     * the front of the queue and is loaded immediately instead of waiting for the current queue to be loaded (which 
+     * the front of the queue and is loaded immediately instead of waiting for the current queue to be loaded (which
      * could take a while).
      */
     SDWebImageHighPriority = 1 << 8,
@@ -75,13 +75,20 @@ typedef NS_OPTIONS(NSUInteger, SDWebImageOptions) {
      * of the placeholder image until after the image has finished loading.
      */
     SDWebImageDelayPlaceholder = 1 << 9,
-
+    
     /**
      * We usually don't call transformDownloadedImage delegate method on animated images,
      * as most transformation code would mangle it.
      * Use this flag to transform them anyway.
      */
     SDWebImageTransformAnimatedImage = 1 << 10,
+    
+    /**
+     * By default, image is added to the imageView after download. But in some cases, we want to
+     * have the hand before setting the image (apply a filter or add it with cross-fade animation for instance)
+     * Use this flag if you want to manually set the image in the completion when success
+     */
+    SDWebImageAvoidAutoSetImage = 1 << 11
 };
 
 typedef void(^SDWebImageCompletionBlock)(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL);
@@ -130,17 +137,17 @@ typedef NSString *(^SDWebImageCacheKeyFilterBlock)(NSURL *url);
  * Here is a simple example of how to use SDWebImageManager:
  *
  * @code
-
-SDWebImageManager *manager = [SDWebImageManager sharedManager];
-[manager downloadImageWithURL:imageURL
-                      options:0
-                     progress:nil
-                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                        if (image) {
-                            // do something with image
-                        }
-                    }];
-
+ 
+ SDWebImageManager *manager = [SDWebImageManager sharedManager];
+ [manager downloadImageWithURL:imageURL
+ options:0
+ progress:nil
+ completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+ if (image) {
+ // do something with image
+ }
+ }];
+ 
  * @endcode
  */
 @interface SDWebImageManager : NSObject
@@ -158,12 +165,12 @@ SDWebImageManager *manager = [SDWebImageManager sharedManager];
  * URL before to use it as a cache key:
  *
  * @code
-
-[[SDWebImageManager sharedManager] setCacheKeyFilter:^(NSURL *url) {
-    url = [[NSURL alloc] initWithScheme:url.scheme host:url.host path:url.path];
-    return [url absoluteString];
-}];
-
+ 
+ [[SDWebImageManager sharedManager] setCacheKeyFilter:^(NSURL *url) {
+ url = [[NSURL alloc] initWithScheme:url.scheme host:url.host path:url.path];
+ return [url absoluteString];
+ }];
+ 
  * @endcode
  */
 @property (nonatomic, copy) SDWebImageCacheKeyFilterBlock cacheKeyFilter;
@@ -184,14 +191,14 @@ SDWebImageManager *manager = [SDWebImageManager sharedManager];
  * @param completedBlock A block called when operation has been completed.
  *
  *   This parameter is required.
- * 
+ *
  *   This block has no return value and takes the requested UIImage as first parameter.
  *   In case of error the image parameter is nil and the second parameter may contain an NSError.
  *
  *   The third parameter is an `SDImageCacheType` enum indicating if the image was retrived from the local cache
  *   or from the memory cache or from the network.
  *
- *   The last parameter is set to NO when the SDWebImageProgressiveDownload option is used and the image is 
+ *   The last parameter is set to NO when the SDWebImageProgressiveDownload option is used and the image is
  *   downloading. This block is thus called repetidly with a partial image. When image is fully downloaded, the
  *   block is called a last time with the full image and the last parameter set to YES.
  *
@@ -245,7 +252,7 @@ SDWebImageManager *manager = [SDWebImageManager sharedManager];
  *
  *  @param url              image url
  *  @param completionBlock  the block to be executed when the check is finished
- *  
+ *
  *  @note the completion block is always executed on the main queue
  */
 - (void)cachedImageExistsForURL:(NSURL *)url

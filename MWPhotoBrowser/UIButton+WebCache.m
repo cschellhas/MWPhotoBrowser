@@ -16,11 +16,11 @@ static char imageURLStorageKey;
 
 - (NSURL *)sd_currentImageURL {
     NSURL *url = self.imageURLStorage[@(self.state)];
-
+    
     if (!url) {
         url = self.imageURLStorage[@(UIControlStateNormal)];
     }
-
+    
     return url;
 }
 
@@ -49,7 +49,7 @@ static char imageURLStorageKey;
 }
 
 - (void)sd_setImageWithURL:(NSURL *)url forState:(UIControlState)state placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options completed:(SDWebImageCompletionBlock)completedBlock {
-
+    
     [self setImage:placeholder forState:state];
     [self sd_cancelImageLoadForState:state];
     
@@ -67,7 +67,7 @@ static char imageURLStorageKey;
     }
     
     self.imageURLStorage[@(state)] = url;
-
+    
     __weak __typeof(self)wself = self;
     id <SDWebImageOperation> operation = [SDWebImageManager.sharedManager downloadImageWithURL:url options:options progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
         if (!wself) return;
@@ -107,9 +107,9 @@ static char imageURLStorageKey;
 
 - (void)sd_setBackgroundImageWithURL:(NSURL *)url forState:(UIControlState)state placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options completed:(SDWebImageCompletionBlock)completedBlock {
     [self sd_cancelImageLoadForState:state];
-
+    
     [self setBackgroundImage:placeholder forState:state];
-
+    
     if (url) {
         __weak __typeof(self)wself = self;
         id <SDWebImageOperation> operation = [SDWebImageManager.sharedManager downloadImageWithURL:url options:options progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
@@ -159,7 +159,7 @@ static char imageURLStorageKey;
         storage = [NSMutableDictionary dictionary];
         objc_setAssociatedObject(self, &imageURLStorageKey, storage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
-
+    
     return storage;
 }
 
