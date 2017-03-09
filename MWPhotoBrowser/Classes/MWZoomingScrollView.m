@@ -272,7 +272,10 @@
     
     // Initial zoom
     self.zoomScale = [self initialZoomScaleWithMinScale];
-    
+
+    CGFloat boundsAR = boundsSize.width / boundsSize.height;
+    CGFloat imageAR = imageSize.width / imageSize.height;
+
     // If we're zooming to fill then centralise
     if (self.zoomScale != minScale &&  (ABS(boundsAR - imageAR) < 0.17)) {
         // Centralise
